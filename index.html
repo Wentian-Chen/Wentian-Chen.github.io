@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子信息工程 | GitHub个人主页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 1px solid #eaeaea;
+            margin-bottom: 40px;
+        }
+        
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #f0f0f0;
+            margin: 0 auto 20px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: #4a6fa5;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #222;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #4a6fa5;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .intro {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        section {
+            margin-bottom: 50px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4a6fa5;
+            color: #333;
+            display: inline-block;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-category {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .skill-category h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #4a6fa5;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-category h3 i {
+            margin-right: 10px;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-list li i {
+            margin-right: 10px;
+            color: #4a6fa5;
+            width: 20px;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .project-card {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .project-header {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 15px;
+        }
+        
+        .project-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .project-tech {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-content p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tech-tag {
+            background-color: #f0f5ff;
+            color: #4a6fa5;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .notes-container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 25px;
+        }
+        
+        .note-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .note-item:last-child {
+            border-bottom: none;
+        }
+        
+        .note-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .note-title i {
+            margin-right: 10px;
+            color: #4a6fa5;
+        }
+        
+        .note-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            background-color: #f0f5ff;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #4a6fa5;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-item:hover {
+            background-color: #e0ebff;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .contact-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+        
+        .contact-text p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid #eaeaea;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-methods {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-item {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="avatar">
+                <i class="fas fa-microchip"></i>
+            </div>
+            <h1>张明</h1>
+            <div class="subtitle">电子信息工程专业 | 嵌入式系统开发</div>
+            <p class="intro">
+                专注于嵌入式系统设计与信号处理，热衷于将理论知识应用于实际工程项目。
+                目前正在研究物联网设备与低功耗通信技术。
+            </p>
+        </header>
+        
+        <section id="skills">
+            <h2><i class="fas fa-code"></i> 技术栈</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-microchip"></i> 硬件设计</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> Altium Designer</li>
+                        <li><i class="fas fa-check"></i> PCB布局布线</li>
+                        <li><i class="fas fa-check"></i> 电路仿真</li>
+                        <li><i class="fas fa-check"></i> 传感器集成</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-laptop-code"></i> 编程语言</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> C/C++</li>
+                        <li><i class="fas fa-check"></i> Python</li>
+                        <li><i class="fas fa-check"></i> MATLAB</li>
+                        <li><i class="fas fa-check"></i> Verilog HDL</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> 开发平台</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> STM32</li>
+                        <li><i class="fas fa-check"></i> Arduino</li>
+                        <li><i class="fas fa-check"></i> Raspberry Pi</li>
+                        <li><i class="fas fa-check"></i> FPGA</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-wifi"></i> 通信技术</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> Bluetooth</li>
+                        <li><i class="fas fa-check"></i> Wi-Fi</li>
+                        <li><i class="fas fa-check"></i> Zigbee</li>
+                        <li><i class="fas fa-check"></i> LoRa</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <h2><i class="fas fa-project-diagram"></i> 项目经验</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>智能家居控制系统</h3>
+                        <div class="project-tech">ARM Cortex-M4 + ZigBee + Android APP</div>
+                    </div>
+                    <div class="project-content">
+                        <p>基于STM32的智能家居控制系统，实现环境监测与设备联动控制，通过优化算法使系统功耗降低35%。</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">STM32</span>
+                            <span class="tech-tag">ESP8266</span>
+                            <span class="tech-tag">MQTT</span>
+                            <span class="tech-tag">ZigBee</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>数字信号处理平台</h3>
+                        <div class="project-tech">MATLAB GUI + 音频处理算法</div>
+                    </div>
+                    <div class="project-content">
+                        <p>开发了基于MATLAB的DSP实验平台，包含FIR/IIR滤波器组设计，支持实时频谱分析和音频处理。</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">MATLAB</span>
+                            <span class="tech-tag">GUI开发</span>
+                            <span class="tech-tag">FFT</span>
+                            <span class="tech-tag">滤波器设计</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>FPGA数字时钟</h3>
+                        <div class="project-tech">Verilog + 7段数码管驱动</div>
+                    </div>
+                    <div class="project-content">
+                        <p>使用Verilog在FPGA上实现多功能数字时钟，具有温度补偿功能，支持多种时间显示格式和闹钟功能。</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Verilog</span>
+                            <span class="tech-tag">FPGA</span>
+                            <span class="tech-tag">ISE Design</span>
+                            <span class="tech-tag">数码管驱动</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="notes">
+            <h2><i class="fas fa-book"></i> 学习笔记</h2>
+            <div class="notes-container">
+                <div class="note-item">
+                    <div class="note-title"><i class="fas fa-file-alt"></i> 电路分析常用公式整理</div>
+                    <p class="note-desc">整理了电子电路分析中常用的公式和定理，包括戴维南定理、诺顿定理等，配有实例解析。</p>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-title"><i class="fas fa-file-alt"></i> PCB布线规范手册</div>
+                    <p class="note-desc">总结了PCB设计中的布线规范、信号完整性原则和EMC设计注意事项。</p>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-title"><i class="fas fa-file-alt"></i> DSP算法实现技巧</div>
+                    <p class="note-desc">数字信号处理算法在嵌入式系统中的优化实现方法，包括定点数运算和内存优化。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2><i class="fas fa-envelope"></i> 联系我</h2>
+            <div class="contact-methods">
+                <a href="mailto:zhangming@example.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-text">
+                        <h3>邮箱</h3>
+                        <p>zhangming@example.com</p>
+                    </div>
+                </a>
+                
+                <a href="https://github.com/zhangming" target="_blank" class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <div class="contact-text">
+                        <h3>GitHub</h3>
+                        <p>github.com/zhangming</p>
+                    </div>
+                </a>
+                
+                <a href="https://linkedin.com/in/zhangming" target="_blank" class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <div class="contact-text">
+                        <h3>LinkedIn</h3>
+                        <p>linkedin.com/in/zhangming</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2023 张明 - 电子信息工程专业 | 简约个人主页</p>
+            <p>使用纯HTML/CSS构建，适配GitHub Pages</p>
+        </footer>
+    </div>
+</body>
+</html>
