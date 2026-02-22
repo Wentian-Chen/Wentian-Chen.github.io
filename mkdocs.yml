@@ -23,4 +23,5 @@ nav:
     - VLA-Adapter 视觉语言动作模型: projects/text.md
   - 教程博客:
     - 博客首页: blog/index.md
-    - 配置CUDA: blog/config_cuda.md
+    - 环境配置:
+      - 配置CUDA: blog/config_cuda.md
