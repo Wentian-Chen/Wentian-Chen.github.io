@@ -1,5 +1,5 @@
 # 1. 站点基础信息 (Site Information)
-site_name: 陈闻天的个人主页
+site_name: 陈闻天的个人博客
 site_description: 记录具身智能研究、机器人项目与技术博客
 site_author: Wentian Chen
 site_url: https://bluejade115.github.io/WentianChen.github.io/
@@ -24,4 +24,18 @@ nav:
   - 教程博客:
     - 博客首页: blog/index.md
     - 环境配置:
-      - 配置CUDA: blog/config_cuda.md
+      - 常见Linux小问题的解决方法: blog/envir_config/fix_some_common_linux_bugs.md
+      - 配置国内APT镜像源: blog/envir_config/config_apt.md
+      - 配置Pip: blog/envir_config/config_pip.md
+      - 配置NVIDIA Driver: blog/envir_config/config_nvidia_driver.md
+      - 配置CUDA: blog/envir_config/config_cuda.md
+      - 配置SSH: blog/envir_config/config_ssh.md
+      - 配置Docker: blog/envir_config/config_docker.md
+    - ROS:
+      - 配置ROS: blog/ros/config_ros.md
+      - ROS2的深入理解: blog/ros/dive_into_ros2.md
+      - SLAM和Navigation: blog/ros/slam_and_navigation.md
+    - Computer Vision:
+      - Yolo的全流程指南: blog/cv/yolo_guide.md
+    - 大模型:
+      - pytorch: blog/model/dive_into_pytorch.md
