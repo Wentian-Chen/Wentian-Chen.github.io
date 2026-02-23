@@ -2,7 +2,7 @@
 site_name: 陈闻天的个人博客
 site_description: 记录具身智能研究、机器人项目与技术博客
 site_author: Wentian Chen
-site_url: https://bluejade115.github.io/WentianChen.github.io/
+# site_url: https://bluejade115.github.io/WentianChen.github.io/
 # 2. 主题与功能配置 (Theme Configuration)
 theme:
   name: material
