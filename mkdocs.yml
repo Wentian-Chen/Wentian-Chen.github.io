@@ -1,7 +1,9 @@
 # 1. 站点基础信息 (Site Information)
-site_name: 陈闻天的个人博客
+site_name: Wentian Chen's website
 site_description: 记录具身智能研究、机器人项目与技术博客
 site_author: Wentian Chen
+repo_name: GitHub
+repo_url: https://github.com/Wentian-Chen
 # site_url: https://bluejade115.github.io/WentianChen.github.io/
 # 2. 主题与功能配置 (Theme Configuration)
 theme:
@@ -21,7 +23,8 @@ nav:
   - 个人简历: resume.md
   - 项目展示:
     - test: projects/text.md
-    - 基于IsaacSim的CuRobo自动抓取及数据采集: projects/simpickgen.md
+    - SimPickGen: projects/simpickgen.md
+    - LeoRobot: projects/leorobot.md
   - 教程博客:
     - 博客首页: blog/index.md
     - 环境配置:
@@ -32,6 +35,7 @@ nav:
       - 配置CUDA: blog/envir_config/config_cuda.md
       - 配置SSH: blog/envir_config/config_ssh.md
       - 配置Docker: blog/envir_config/config_docker.md
+      - 配置Thor: blog/envir_config/config_thor.md
     - ROS:
       - 配置ROS: blog/ros/config_ros.md
       - ROS2的深入理解: blog/ros/dive_into_ros2.md
@@ -41,3 +45,7 @@ nav:
       - Yolo的全流程指南: blog/cv/yolo_guide.md
     - 大模型:
       - pytorch: blog/model/dive_into_pytorch.md
+    - 仿真:
+      - IsaacSim: blog/sim/isaacsim.md
+      - IsaacLab: blog/sim/isaaclab.md
+
