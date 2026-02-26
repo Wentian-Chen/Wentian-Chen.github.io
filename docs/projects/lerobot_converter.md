@@ -8,12 +8,12 @@
  * 
  * Copyright (c) 2026 by boboji11 , All Rights Reserved. 
 -->
-# lerobot_convertor
+# lerobot_converter
 `lerobot_converter` 是一个任意数据集转换至 LeRobot 格式的轻量级框架：
 
 在机器人控制与 Vision-Language-Action (VLA) 模型的开发过程中，数据准备往往是最折磨人的一环。将各种来源的数据（如自定义 HDF5、RLDS）转换为 Hugging Face 官方的 LeRobotDataset 格式，常常伴随着内存爆炸和满天飞的硬编码规则。
 
-官方或现有的转换工具往往将源数据规则硬编码在框架里，缺乏灵活性。为了让数据集的二次开发和转换变得像搭积木一样轻松，我开发并开源了 lerobot_convertor。lerobot_convertor 致力于打造一个可扩展的数据集转换器框架，它的核心设计理念是：把脏活累活封装好，把最大的自由度留给用户。
+官方或现有的转换工具往往将源数据规则硬编码在框架里，缺乏灵活性。为了让数据集的二次开发和转换变得像搭积木一样轻松，我开发并开源了 lerobot_converter。lerobot_converter 致力于打造一个可扩展的数据集转换器框架，它的核心设计理念是：把脏活累活封装好，把最大的自由度留给用户。
 
 核心特点：
 
