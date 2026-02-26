@@ -1,5 +1,15 @@
+<!--
+ * @Author: boboji11 wendychen112@qq.com
+ * @Date: 2026-02-26 22:15:30
+ * @LastEditors: boboji11 wendychen112@qq.com
+ * @LastEditTime: 2026-02-26 22:29:26
+ * @FilePath: \WentianChen.github.io\docs\projects\lerobot_converter.md
+ * @Description: 
+ * 
+ * Copyright (c) 2026 by boboji11 , All Rights Reserved. 
+-->
 # lerobot_convertor
-`lerobot_convertor` 是一个任意数据集转换至 LeRobot 格式的轻量级框架：
+`lerobot_converter` 是一个任意数据集转换至 LeRobot 格式的轻量级框架：
 
 在机器人控制与 Vision-Language-Action (VLA) 模型的开发过程中，数据准备往往是最折磨人的一环。将各种来源的数据（如自定义 HDF5、RLDS）转换为 Hugging Face 官方的 LeRobotDataset 格式，常常伴随着内存爆炸和满天飞的硬编码规则。
 
@@ -21,4 +31,4 @@
 - 过程：用户做“读取 + 映射 + feature 对齐”
 - 输出：官方 `LeRobotDataset`
 
-更多详细细节请移步项目仓库地址：[Github-lerobot_convertor](https://github.com/Wentian-Chen/lerobot_convertor)
+更多详细细节请移步项目仓库地址：[Github-lerobot_converter](https://github.com/Wentian-Chen/lerobot_converter)
