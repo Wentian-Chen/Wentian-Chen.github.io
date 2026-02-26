@@ -22,9 +22,9 @@ nav:
   - 首页: index.md
   - 个人简历: resume.md
   - 项目展示:
-    - test: projects/text.md
     - SimPickGen: projects/simpickgen.md
     - LeoRobot: projects/leorobot.md
+    - lerobot_convertor: projects/lerobot_converter.md
   - 教程博客:
     - 博客首页: blog/index.md
     - 环境配置:
