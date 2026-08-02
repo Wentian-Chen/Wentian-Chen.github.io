@@ -11,8 +11,8 @@ hide:
     <div class="km-dots" aria-hidden="true"><span></span><span></span><span></span></div>
     <p class="km-hero-greet">欢迎来到我的赛博自留地</p>
     <h1 class="km-hero-title">你好，我是陈闻天</h1>
-    <p class="km-hero-meta">Wentian Chen · 深圳大学 · 电子信息工程 · 大三学生</p>
-    <p class="km-hero-sub">具身智能（Embodied AI）与 VLA 模型方向，热衷于让机器人真正「动」起来的实干派。</p>
+    <p class="km-hero-meta">深圳大学 · 电子信息工程 · 2023级本科生 · Wentian Chen</p>
+    <p class="km-hero-sub">具身智能 For VLA 模型方向，热衷于让机器人真正「动」起来的实干派。</p>
     <div class="km-hero-actions">
       <a class="km-btn km-btn-primary" href="/blog/">逛逛博客</a>
       <a class="km-btn km-btn-ghost" href="/projects/">看看项目</a>
@@ -25,11 +25,11 @@ hide:
   <section class="km-section">
     <h2 class="km-section-title">关于我</h2>
     <p class="km-text">
-      截止至 2026 年，我是一名深圳大学电子信息工程专业的大三学生。如果把我的成长轨迹画成一条线，它大概是从「好奇」出发，途经「折腾」，一路通向「让机器人动起来」。
-      我最早接触机器人时，只是被机械臂的每一次抓取、小车的每一次避障所吸引；后来随着对具身智能（Embodied AI）和 VLA（Vision-Language-Action）模型的了解加深，我意识到这件事远比想象中有意思——它把感知、语言和动作统一在同一个系统里，也让「机器人真正理解并操作物理世界」变得不再遥远。
+      截止至 2026 年，我是一名深圳大学电子信息工程专业的2023级本科生。如果把我的成长轨迹画成一条线，它大概是从「好奇」出发，途经「折腾」，一路通向「让机器人动起来」。
+      从STM32嵌入式入门，阅读花书，学习目标检测模型，再到机器人的SLAM导航，一路学习和尝试多个领域，不断探索着兴趣爱好；后来随着对具身智能（Embodied AI）和 VLA（Vision-Language-Action）模型的了解加深，我意识到这件事远比想象中有意思——它把感知、语言和动作统一在同一个系统里，也让「机器人真正理解并操作物理世界」变得不再遥远。
     </p>
     <p class="km-text" style="margin-top: 1.4rem;">
-      于是我从「看」走到了「做」：在仿真里搭环境、在真机上调部署、在炼丹和踩坑之间反复横跳。这个网站就是这条路上的数字花园——我把研究进展、项目记录和技术笔记都种在这里，希望它们能生根发芽，也希望能帮到路过的你。
+      于是我从「看」走到了「做」：在仿真里搭环境、在真机上调部署、在炼丹和踩坑之间反复横跳。我把研究进展、项目记录和技术笔记都种在这里，希望它们能生根发芽，也希望能帮到路过的你。可惜，精力有限，无法将我的全流程学习经历都记录在这里。
     </p>
   </section>
 
