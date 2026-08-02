@@ -9,6 +9,13 @@ repo_url: https://github.com/Wentian-Chen
 theme:
   name: material
   language: zh # 设置语言为中文，优化搜索分词和界面提示
+  palette:
+    - scheme: default
+      primary: white
+      accent: pink
+  font:
+    text: Noto Sans SC
+    code: Roboto Mono
   features:
     - search.suggest       # 搜索输入时显示补全建议
     - search.highlight     # 搜索结果高亮显示
@@ -17,11 +24,16 @@ theme:
     - toc.follow           # 右侧目录高亮会跟随你在文章中的滚动自动切换
     - content.code.copy    # 允许一键复制你的代码块
 
+# 3. 自定义样式（韩式极简 Korean Minimal）
+extra_css:
+  - stylesheets/korean-minimal.css
+
 # 3. 网站导航目录结构 (Navigation Structure)
 nav:
   - 首页: index.md
   - 个人简历: resume.md
   - 项目展示:
+    - 项目首页: projects/index.md
     - SimPickGen: projects/simpickgen.md
     - LeoRobot: projects/leorobot.md
     - lerobot_convertor: projects/lerobot_converter.md
@@ -45,7 +57,7 @@ nav:
       - Yolo的全流程指南: blog/cv/yolo_guide.md
     - 大模型:
       - pytorch: blog/model/dive_into_pytorch.md
-    - 仿真:
-      - IsaacSim: blog/sim/isaacsim.md
-      - IsaacLab: blog/sim/isaaclab.md
+  - 仿真:
+    - IsaacSim: sim/isaacsim.md
+    - IsaacLab: sim/isaaclab.md
 
