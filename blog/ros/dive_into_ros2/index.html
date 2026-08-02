@@ -1,0 +1,2592 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="记录具身智能研究、机器人项目与技术博客">
+      
+      
+        <meta name="author" content="Wentian Chen">
+      
+      
+      
+        <link rel="prev" href="../config_ros/">
+      
+      
+        <link rel="next" href="../slam_and_navigation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>ROS2的深入理解 - Wentian Chen's website</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/korean-minimal.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ros2" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Wentian Chen&#39;s website" class="md-header__button md-logo" aria-label="Wentian Chen's website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wentian Chen's website
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ROS2的深入理解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="pink"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Wentian-Chen" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../resume/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  个人简历
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../projects/" class="md-tabs__link">
+          
+  
+  
+  项目展示
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  教程博客
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../sim/isaacsim/" class="md-tabs__link">
+          
+  
+  
+  仿真
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Wentian Chen&#39;s website" class="md-nav__button md-logo" aria-label="Wentian Chen's website" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Wentian Chen's website
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Wentian-Chen" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../resume/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    个人简历
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    项目展示
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    项目展示
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    项目首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/simpickgen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SimPickGen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/leorobot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LeoRobot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/lerobot_converter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    lerobot_convertor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    教程博客
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    教程博客
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    博客首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    环境配置
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    环境配置
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envir_config/fix_some_common_linux_bugs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常见Linux小问题的解决方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envir_config/config_apt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置国内APT镜像源
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envir_config/config_pip/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置Pip
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envir_config/config_nvidia_driver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置NVIDIA Driver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envir_config/config_cuda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置CUDA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envir_config/config_ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envir_config/config_docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../envir_config/config_thor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置Thor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ROS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config_ros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置ROS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS2的深入理解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS2的深入理解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        引言
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="引言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ros2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ROS2 是什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么是 DDS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ros2-ros1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ROS2 与 ROS1 的关键差异
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="核心概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        节点 Node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        话题 Topic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        服务 Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        动作 Action
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数 Parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通信与 QoS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="通信与 QoS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两种通信模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QoS（服务质量）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        工程结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="工程结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        工作空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colcon-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        colcon build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功能包结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例代码
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="示例代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#talkerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        发布者 talker.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listenerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        订阅者 listener.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Launch 文件
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tf2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tf2 坐标变换
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tf2 坐标变换">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        静态变换与命令行示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用调试命令
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        找不到节点/话题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dds-ros_domain_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DDS 多机通信需要相同 ROS_DOMAIN_ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colcon-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        colcon 未 source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他高频坑
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slam_and_navigation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SLAM和Navigation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cmakelists_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CMakelists详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer Vision
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computer Vision
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cv/yolo_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Yolo的全流程指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大模型
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    大模型
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model/dive_into_pytorch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pytorch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    仿真
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    仿真
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sim/isaacsim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IsaacSim
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sim/isaaclab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IsaacLab
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        引言
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="引言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ros2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ROS2 是什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么是 DDS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ros2-ros1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ROS2 与 ROS1 的关键差异
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="核心概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        节点 Node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        话题 Topic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        服务 Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        动作 Action
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数 Parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通信与 QoS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="通信与 QoS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两种通信模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QoS（服务质量）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        工程结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="工程结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        工作空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colcon-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        colcon build
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功能包结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例代码
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="示例代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#talkerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        发布者 talker.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listenerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        订阅者 listener.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Launch 文件
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tf2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tf2 坐标变换
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tf2 坐标变换">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        静态变换与命令行示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用调试命令
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        找不到节点/话题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dds-ros_domain_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DDS 多机通信需要相同 ROS_DOMAIN_ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colcon-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        colcon 未 source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        其他高频坑
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="ros2">深入理解 ROS2</h1>
+<p>ROS2 在 2022 年发布 LTS 版本 Humble（对应 Ubuntu 22.04）之后，生态已经相当成熟。作为一个研究具身智能的学生，我明显感觉到：学术界新的开源项目（机械臂抓取、视觉语言导航、仿真训练）都在往 ROS2 迁移。这篇笔记是我从 ROS1 转到 ROS2 时整理的核心知识框架，从概念到代码一次讲清。</p>
+<h2 id="_1">引言</h2>
+<h3 id="ros2_1">ROS2 是什么</h3>
+<p>ROS2 是 ROS（Robot Operating System）的下一代版本，它保留了 ROS1"节点-话题-服务"的编程心智模型，但通信底层完全重写：<strong>ROS2 用 DDS（Data Distribution Service）取代了 ROS1 的 TCP/UDP 直连</strong>。DDS 是一个工业级的分布式通信标准，它自带服务发现机制——节点不需要中央服务器（ROS1 的 roscore），彼此之间可以自动发现、自动组网。</p>
+<h3 id="dds">为什么是 DDS</h3>
+<p>DDS 带来的最直观好处有三个：<strong>去中心化</strong>——没有 roscore 单点故障，节点之间通过服务发现自动组网，任何节点挂掉不影响整个系统；<strong>QoS 可配置</strong>——原生支持"可靠/尽力而为"等通信策略，按场景选择；<strong>多机即天然</strong>——同一局域网内只需 ROS_DOMAIN_ID 一致即可直接通信。</p>
+<h3 id="ros2-ros1">ROS2 与 ROS1 的关键差异</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>ROS1 (Noetic)</th>
+<th>ROS2 (Humble)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通信架构</td>
+<td>中心化，依赖 roscore</td>
+<td>去中心化，DDS 自动发现</td>
+</tr>
+<tr>
+<td>构建工具</td>
+<td>catkin_make / catkin build</td>
+<td>colcon</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>Python2/3 混用</td>
+<td>仅 Python3</td>
+</tr>
+<tr>
+<td>消息接口</td>
+<td>msgs/srv 文件</td>
+<td>统一为 .msg/.srv/.action，用 rosidl 生成</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>无统一概念</td>
+<td>引入生命周期节点（未配置/未激活/激活/销毁）</td>
+</tr>
+<tr>
+<td>实时性</td>
+<td>不保证</td>
+<td>支持（executor、DDS 实时配置）</td>
+</tr>
+<tr>
+<td>参数服务器</td>
+<td>集中式 rosparam</td>
+<td>分布式，每个节点持有自己的参数</td>
+</tr>
+</tbody>
+</table>
+<p>!!! note "说明"
+    表格里的"生命周期"指 ROS2 的 Lifecycle Node：节点可在未配置/未激活/激活等状态之间显式切换，方便系统做受控启停（导航中的规划器、控制器就是生命周期节点），这是 ROS1 完全没有的机制。</p>
+<h2 id="_2">核心概念</h2>
+<p>ROS2 的所有编程都围绕下面五个概念展开，理解它们就理解了 ROS2 的 90%。</p>
+<h3 id="node">节点 Node</h3>
+<p>节点是可独立运行的最小执行单元，一个机器人的程序通常由几十个节点组成，每个节点负责一件事。节点之间通过话题、服务、动作通信，彼此不直接调用。</p>
+<pre><code class="language-bash">ros2 node list          # 查看当前所有节点
+ros2 node info /talker  # 查看某个节点的详细信息（话题、服务、动作、参数）
+</code></pre>
+<h3 id="topic">话题 Topic</h3>
+<p>话题实现<strong>异步、单向、多对多</strong>的通信：发布者（publisher）把消息写到话题上，订阅者（subscriber）按自己的频率去读。适合传感器数据流（激光、图像、里程计）这种持续高频的通信。</p>
+<pre><code class="language-bash">ros2 topic list              # 查看所有话题
+ros2 topic echo /chatter     # 实时打印某个话题的消息
+ros2 topic info /chatter     # 查看话题的消息类型和收发双方
+</code></pre>
+<h3 id="service">服务 Service</h3>
+<p>服务实现<strong>同步、请求-响应</strong>的通信：客户端发起请求并阻塞等待服务器的应答。适合"问一句、答一句"的场景，比如查询机器人状态、设置参数。</p>
+<pre><code class="language-bash">ros2 service list            # 查看所有服务
+ros2 service type /xxx       # 查看服务类型
+ros2 service call /xxx 接口名 &quot;{参数}&quot;  # 直接调用服务
+</code></pre>
+<h3 id="action">动作 Action</h3>
+<p>动作是<strong>异步、带反馈</strong>的长任务通信：客户端请求一个目标，服务器一边执行一边周期性地发布反馈（feedback），最终返回结果（result）。适合导航、机械臂运动这类耗时任务——"去某个点"既要能持续汇报进度，又要能随时取消。</p>
+<pre><code class="language-bash">ros2 action list        # 查看所有动作
+ros2 action info /xxx   # 查看动作类型
+</code></pre>
+<h3 id="parameter">参数 Parameter</h3>
+<p>参数是节点的配置项，本质是一个键值对，每个节点拥有自己的一组参数。运行时可以通过命令行修改，也可以写成 yaml 文件在启动时加载。</p>
+<pre><code class="language-bash">ros2 param list              # 查看所有节点的参数
+ros2 param get /node 参数名   # 读取参数
+ros2 param set /node 参数名 值 # 修改参数（运行时可改）
+</code></pre>
+<p>!!! tip "技巧"
+    用 <code>ros2 node info &lt;node&gt;</code> 查看节点是理解一个 ROS2 系统最快的方法，它会一次性列出这个节点的所有话题、服务、动作和参数。</p>
+<h2 id="qos">通信与 QoS</h2>
+<h3 id="_3">两种通信模型</h3>
+<p>ROS2 通信分两大类：<strong>发布-订阅（pub/sub）</strong>，即话题，消息单向流动、发布者与订阅者完全解耦，适合传感器数据流；<strong>请求-响应（req/resp）</strong>，即服务，一问一答、同步阻塞，适合查询与指令类一次性交互。需要持续反馈、可取消的长任务则用动作（Action）。</p>
+<h3 id="qos_1">QoS（服务质量）</h3>
+<p>QoS 决定一次通信的可靠性承诺，最常用的两个策略是 <strong>RELIABLE</strong> 和 <strong>BEST_EFFORT</strong>：RELIABLE 保证消息不丢（发送方重传直到确认），适合控制指令、关键状态；BEST_EFFORT 尽力而为、延迟更低，适合高频传感器数据（比如点云），因为下一帧马上就到。</p>
+<p>!!! warning "注意"
+    QoS 不匹配的双方是<strong>无法通信</strong>的（话题建立了但收不到数据）。最常见的坑：点云传感器的 BEST_EFFORT 与订阅方的默认 RELIABLE 不匹配。如果 <code>ros2 topic echo</code> 没数据但 <code>ros2 topic list</code> 能看到话题，优先检查 QoS。</p>
+<h2 id="_4">工程结构</h2>
+<h3 id="_5">工作空间</h3>
+<p>ROS2 的工作空间（workspace）根目录下固定有四个目录：</p>
+<pre><code class="language-text">my_ws/
+├── src/      # 源码：所有功能包都放在这里
+├── build/    # 构建中间产物（CMake 缓存等），可删除重建
+├── install/  # 编译产物和安装环境，编译后需要 source 这里
+└── log/      # 编译日志
+</code></pre>
+<h3 id="colcon-build">colcon build</h3>
+<p>ROS2 用 <code>colcon</code> 构建工作空间，常用命令：</p>
+<pre><code class="language-bash">colcon build                                   # 构建 src 下所有包
+colcon build --packages-select my_pkg         # 只构建指定包
+colcon build --packages-select my_pkg --symlink-install  # Python 包推荐，改代码免重编译
+source install/setup.bash                     # 编译后必须 source 才能使用新包
+</code></pre>
+<p>!!! danger "踩坑"
+    <code>colcon build</code> 之后<strong>一定要</strong> <code>source install/setup.bash</code>（最好写入 ~/.bashrc）。很多"明明编译了却 ros2 run 不到"的报错，都是没 source 新工作空间导致的。另外注意：ROS2 环境里 ROS1 和 ROS2 的 setup 不能同时 source，否则环境变量会互相污染。</p>
+<h3 id="_6">功能包结构</h3>
+<p>一个功能包至少包含 <code>package.xml</code>（元信息）和构建文件。按语言分两种：</p>
+<ul>
+<li><strong>C++ 包</strong>：构建文件是 <code>CMakeLists.txt</code>，用 <code>ament_cmake</code> 声明依赖和可执行文件。</li>
+<li><strong>Python 包</strong>：构建文件是 <code>setup.py</code>，通过 <code>entry_points</code> 注册入口函数，不需要 <code>setup.py</code> 里的 install_requires 额外写 ROS 依赖（写在 package.xml）。</li>
+</ul>
+<pre><code class="language-text">my_pkg/
+├── package.xml   # 包名、版本、依赖声明（两类包都需要）
+├── CMakeLists.txt  # C++ 包：ament_cmake 构建脚本
+├── setup.py      # Python 包：注册可执行入口
+├── src/          # C++ 源码目录
+└── my_pkg/       # Python 源码目录
+</code></pre>
+<p>package.xml 里 <code>&lt;depend&gt;rclpy&lt;/depend&gt;</code> 这样的标签声明依赖，编译系统会自动处理。</p>
+<h2 id="_7">示例代码</h2>
+<p>下面用 rclpy 写一个完整的发布-订阅例子：talker 节点每秒在 <code>chatter</code> 话题上发一条消息，listener 节点接收并打印。这是 ROS2 的 hello world，代码严格按官方教程的标准写法。</p>
+<h3 id="talkerpy">发布者 talker.py</h3>
+<pre><code class="language-python">import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+
+class Talker(Node):
+    def __init__(self):
+        super().__init__('talker')
+        # 创建一个发布者：话题 chatter，消息类型 String，队列长度 10
+        self.publisher_ = self.create_publisher(String, 'chatter', 10)
+        # 创建一个定时器：每 1.0 秒回调一次
+        self.timer = self.create_timer(1.0, self.timer_callback)
+        self.count = 0
+
+    def timer_callback(self):
+        msg = String()
+        msg.data = f'Hello ROS2: {self.count}'
+        self.publisher_.publish(msg)
+        self.get_logger().info(f'Publishing: {msg.data}')
+        self.count += 1
+
+
+def main(args=None):
+    rclpy.init(args=args)      # 初始化 rclpy
+    talker = Talker()          # 创建节点
+    rclpy.spin(talker)         # 阻塞式运行，持续处理回调
+    talker.destroy_node()      # 退出时销毁节点
+    rclpy.shutdown()           # 关闭 rclpy
+</code></pre>
+<h3 id="listenerpy">订阅者 listener.py</h3>
+<pre><code class="language-python">import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+
+class Listener(Node):
+    def __init__(self):
+        super().__init__('listener')
+        # 创建订阅者：话题 chatter，收到消息时调用回调
+        self.subscription = self.create_subscription(
+            String, 'chatter', self.listener_callback, 10)
+
+    def listener_callback(self, msg):
+        self.get_logger().info(f'I heard: {msg.data}')
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    listener = Listener()
+    rclpy.spin(listener)
+    listener.destroy_node()
+    rclpy.shutdown()
+</code></pre>
+<p>!!! tip "技巧"
+    <code>rclpy.spin()</code> 是 rclpy 的事件循环：节点收到的所有回调（订阅、定时器、服务）都由它调度。回调里<strong>不要做耗时操作</strong>，否则会阻塞其他回调，这是 rclpy 编程的第一条铁律。</p>
+<p>运行方式：两个终端各开一个（确保都已 source），分别执行 <code>python3 talker.py</code> 和 <code>python3 listener.py</code>，就能看到订阅者实时打印发布者发出的消息。</p>
+<h2 id="launch">Launch 文件</h2>
+<p>ROS2 的 launch 文件是 Python 脚本，用来一键启动一组节点并配置参数，替代 ROS1 的 xml launch。基本结构是：定义 <code>generate_launch_description()</code> 函数，返回 <code>LaunchDescription</code>，里面是一个个 <code>Node()</code> 声明。</p>
+<pre><code class="language-python">from launch import LaunchDescription
+from launch_ros.actions import Node
+
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='my_pkg',          # 功能包名
+            executable='talker',       # 可执行文件名（Python 包对应 entry point）
+            name='talker',             # 节点名（覆盖代码里的名字）
+            output='screen',           # 日志输出到终端
+            parameters=[{'count_max': 100}],  # 传入参数
+        ),
+        Node(
+            package='my_pkg',
+            executable='listener',
+            output='screen',
+        ),
+    ])
+</code></pre>
+<p>启动方式：</p>
+<pre><code class="language-bash">ros2 launch my_pkg my_launch.py
+</code></pre>
+<p>!!! note "说明"
+    launch 文件放在包的 <code>launch/</code> 目录下，并要在 <code>CMakeLists.txt</code>（C++）或 <code>setup.py</code>（Python）里把 launch 目录安装出去，<code>ros2 launch</code> 才能找到它。</p>
+<h2 id="tf2">tf2 坐标变换</h2>
+<h3 id="_8">基本概念</h3>
+<p>机器人身上有无数个坐标系：地图系 map、机器人本体 base_link、激光雷达 laser、机械臂末端 ee……tf2 就是管理这些坐标系之间变换关系的库。每个变换都是<strong>父坐标系（parent frame）到子坐标系（child frame）</strong>的平移+旋转，所有变换构成一棵严格单根的 TF 树（每个 frame 只能有一个父）。</p>
+<p>典型的一棵 TF 树：</p>
+<pre><code class="language-text">map (世界/地图系)
+└── odom (里程计系)
+    └── base_link (机器人本体)
+        └── laser (激光雷达)
+        └── camera_link (相机)
+</code></pre>
+<h3 id="_9">静态变换与命令行示例</h3>
+<p>机器人本体和传感器之间的变换是固定的（传感器装在机器人上不动），用静态变换发布：</p>
+<pre><code class="language-bash"># 参数：x y z yaw pitch roll frame_id child_frame_id
+ros2 run tf2_ros static_transform_publisher 0.1 0 0.2 0 0 0 base_link laser
+</code></pre>
+<p>这个命令发布"laser 在 base_link 坐标系下 (0.1, 0, 0.2) 处、无旋转"的静态变换。其他传感器（相机、imu）同理。</p>
+<p>调试 TF 树：</p>
+<pre><code class="language-bash">ros2 run tf2_ros tf2_echo base_link laser   # 查看两个 frame 之间的实时变换
+ros2 run tf2_tools view_frames              # 生成 TF 树的 PDF 报告
+</code></pre>
+<p>!!! warning "注意"
+    发布 TF 前要先想清楚谁是谁的父系：<strong>父子关系决定了变换树的结构</strong>，只能按"世界→车体→传感器"这种层级来发，不能乱挂。传感器挂错父系是 TF 报错的常见原因之一。</p>
+<h2 id="_10">常用调试命令</h2>
+<p>把下面这些命令记熟，排查 ROS2 问题基本够用：</p>
+<pre><code class="language-bash">ros2 node list                     # 所有节点
+ros2 node info /node_name          # 单个节点的完整信息
+
+ros2 topic list                    # 所有话题
+ros2 topic echo /topic             # 实时查看话题消息
+ros2 topic info /topic             # 话题类型与参与者
+ros2 topic pub /topic 类型 &quot;{...}&quot; # 手动发布一条消息（测试很有用）
+
+ros2 service list                  # 所有服务
+ros2 service call /srv 类型 &quot;{...}&quot; # 手动调用服务
+
+ros2 action list                   # 所有动作
+ros2 action info /action           # 动作类型与参与者
+
+ros2 param list                    # 所有参数
+ros2 param get /node 参数名         # 读参数
+ros2 param set /node 参数名 值      # 写参数
+
+rqt_graph                          # 可视化话题/节点通信图，图形化 top 级调试工具
+rviz2                              # 3D 可视化，机器人调试标配
+</code></pre>
+<p>!!! tip "技巧"
+    一切异常从 <code>ros2 node list</code> 和 <code>ros2 topic list</code> 开始排查：先确认节点到底起来没有、话题到底存在没有，再往下查 QoS、TF、参数。很多问题在第一步就现形了。</p>
+<h2 id="_11">常见问题</h2>
+<h3 id="_12">找不到节点/话题</h3>
+<p><code>ros2 node list</code> 里什么都没有，或者 <code>ros2 run</code> 提示包不存在，按顺序检查：</p>
+<ol>
+<li>是否 source 了正确的环境：<code>source /opt/ros/humble/setup.bash</code>，以及你自己的 <code>source ~/my_ws/install/setup.bash</code>。</li>
+<li>是否编译过且编译成功：<code>colcon build --packages-select 你的包</code>。</li>
+<li>三个终端是否都在<strong>同一个 ROS_DOMAIN_ID</strong> 下（见下条）。</li>
+</ol>
+<h3 id="dds-ros_domain_id">DDS 多机通信需要相同 ROS_DOMAIN_ID</h3>
+<p>ROS_DOMAIN_ID 相当于通信的"频道号"，不同 ID 的节点互相看不见。多机协作时，所有机器必须：</p>
+<ul>
+<li>设置相同的 <code>ROS_DOMAIN_ID</code>（比如都设 0，或都设 42）。</li>
+<li>处于同一局域网，且能互相访问（检查防火墙，DDS 需要 UDP 多播）。</li>
+</ul>
+<p>排查命令：<code>echo $ROS_DOMAIN_ID</code>，两端不一致时 <code>export ROS_DOMAIN_ID=0</code> 统一即可。</p>
+<h3 id="colcon-source">colcon 未 source</h3>
+<p>这是出现频率最高的一类问题：编译完新包后，<code>ros2 run</code> 报错找不到。原因几乎总是<strong>没有 source install/setup.bash</strong>，或者 source 了但终端不是当前 shell。建议把 source 写进 <code>~/.bashrc</code>：</p>
+<pre><code class="language-bash">source /opt/ros/humble/setup.bash
+source ~/my_ws/install/setup.bash   # 你的工作空间要放这一行，且不能是 ROS1 的
+</code></pre>
+<h3 id="_13">其他高频坑</h3>
+<ul>
+<li><strong>QoS 不匹配</strong>：话题看得到、echo 没数据，检查 Reliability 策略（见上文 QoS 部分）。</li>
+<li><strong>环境污染</strong>：ROS1 和 ROS2 的 setup.bash 不要同时 source，终端里的 <code>ROS_DISTRO</code> 要一致。</li>
+</ul>
+<p>ROS2 的核心知识到这里就覆盖全了。接下来最好的学习方式是动手：写一个包、跑通 talker/listener、加上 launch 文件、接上 rviz2 看坐标变换，把这篇笔记里的概念全部过一遍。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["search.suggest", "search.highlight", "navigation.tabs", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

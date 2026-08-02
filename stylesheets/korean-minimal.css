@@ -1,0 +1,601 @@
+/* ============================================================
+   Korean Minimal (韩式极简) Design System
+   暖白底色 · 粉彩点缀 · 细线克制 · 大量留白
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400&display=swap');
+
+:root {
+  /* Token 字典 */
+  --km-slate: #3d4a5c;          /* 主文字 / 标题 */
+  --km-slate-light: #5b6a7d;    /* 次级文字 (AA ≥ 4.5:1) */
+  --km-slate-faint: #8a97a7;    /* 弱化文字 / 元信息 */
+  --km-blush: #d4a5a5;          /* 腮红粉 - 点缀色 */
+  --km-blush-deep: #9c6161;     /* 链接色 (AA ≥ 4.5:1) */
+  --km-sage: #c9d5c5;           /* 鼠尾草绿 - 点缀 */
+  --km-sand: #e8d9c4;           /* 沙色 - 点缀 */
+  --km-bg: #faf9f7;             /* 暖白背景 */
+  --km-card-bg: #faf9f7;        /* 卡片底色 */
+  --km-code-bg: #f4f1eb;        /* 代码暖底 */
+  --km-border: rgba(61, 74, 92, 0.08);   /* 细线边框 */
+  --km-border-soft: rgba(61, 74, 92, 0.10);
+  --km-shadow-sm: 0 1px 2px rgba(61, 74, 92, 0.06);
+  --km-shadow-md: 0 4px 12px rgba(61, 74, 92, 0.06);
+  --km-shadow-lg: 0 8px 24px rgba(61, 74, 92, 0.08);
+  --km-focus: 0 0 0 3px rgba(212, 165, 165, 0.15);
+  --km-radius: 16px;            /* rounded-2xl */
+
+  /* 覆盖 Material 主题变量 */
+  --md-text-font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --md-code-font-family: 'Roboto Mono', 'Cascadia Code', Consolas, monospace;
+  --md-shadow-z1: var(--km-shadow-md);
+  --md-shadow-z2: var(--km-shadow-lg);
+}
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #ffffff;
+  --md-primary-fg-color--light: #faf9f7;
+  --md-primary-fg-color--dark: #f3f0ea;
+  --md-primary-bg-color: var(--km-slate);
+  --md-accent-fg-color: var(--km-blush-deep);
+  --md-default-bg-color: var(--km-bg);
+  --md-default-fg-color: var(--km-slate);
+  --md-default-fg-color--light: var(--km-slate-light);
+  --md-default-fg-color--lighter: var(--km-slate-faint);
+  --md-typeset-color: var(--km-slate);
+  --md-typeset-a-color: var(--km-blush-deep);
+  --md-code-bg-color: var(--km-code-bg);
+  --md-code-fg-color: var(--km-slate);
+  --md-code-hl-color: rgba(212, 165, 165, 0.25);
+  --md-footer-bg-color: #f3f0ea;
+  --md-footer-bg-color--dark: #ebe7de;
+  --md-footer-fg-color: var(--km-slate);
+  --md-footer-fg-color--light: var(--km-slate-light);
+  --md-footer-fg-color--lighter: var(--km-slate-faint);
+}
+
+/* ---------- 全局 ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-weight: 300;
+}
+
+::selection {
+  background-color: rgba(212, 165, 165, 0.28);
+  color: var(--km-slate);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: none;
+  box-shadow: var(--km-focus);
+  border-radius: var(--km-radius);
+}
+
+/* 滚动条（WebKit 优雅降级，不强制） */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(61, 74, 92, 0.15);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- 排版 ---------- */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--km-slate);
+}
+
+.md-typeset {
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+/* 链接：克制的腮红下划线 */
+.md-typeset a {
+  text-decoration: none;
+  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+}
+.md-typeset a:hover {
+  color: var(--km-slate);
+  text-decoration: underline;
+  text-decoration-color: rgba(212, 165, 165, 0.6);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* 引用块：细粉线而非粗侧边 */
+.md-typeset blockquote {
+  border-left: 1px solid rgba(212, 165, 165, 0.6);
+  padding-left: 1.1rem;
+  color: var(--km-slate-light);
+}
+
+/* 分隔线：克制的细线 */
+.md-typeset hr {
+  border-bottom: 1px solid var(--km-border);
+}
+
+/* ---------- 顶栏 / 导航 ---------- */
+.md-header {
+  background-color: #ffffff;
+  box-shadow: none;
+  border-bottom: 1px solid var(--km-border);
+  color: var(--km-slate);
+}
+
+.md-header__title {
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+.md-tabs {
+  background-color: #ffffff;
+  color: var(--km-slate);
+  box-shadow: none;
+  border-bottom: 1px solid var(--km-border);
+}
+
+.md-tabs__link {
+  opacity: 1;
+  color: var(--km-slate-light);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  transition: all 0.3s ease-in-out;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  color: var(--km-slate);
+  box-shadow: inset 0 -2px 0 0 var(--km-blush);
+  opacity: 1;
+}
+
+/* 侧边导航 */
+.md-nav__link {
+  color: var(--km-slate-light);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease-in-out;
+}
+.md-nav__link--active,
+.md-nav__link:hover {
+  color: var(--km-slate);
+}
+.md-nav__title {
+  color: var(--km-slate);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- 搜索 ---------- */
+.md-search__form {
+  background-color: var(--km-code-bg);
+  border-radius: 12px;
+}
+.md-search__input {
+  color: var(--km-slate);
+}
+
+/* ---------- 按钮 ---------- */
+.md-typeset .md-button {
+  border-radius: var(--km-radius);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  box-shadow: var(--km-shadow-sm);
+  transition: all 0.3s ease-in-out;
+}
+.md-typeset .md-button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--km-shadow-md);
+}
+.md-typeset .md-button:active {
+  transform: scale(0.98);
+}
+.md-typeset .md-button--primary {
+  background-color: var(--km-slate);
+  border-color: var(--km-slate);
+  color: var(--km-bg);
+}
+.md-typeset .md-button--primary:hover {
+  background-color: #51617a;
+  border-color: #51617a;
+  color: var(--km-bg);
+}
+
+/* ---------- 代码 ---------- */
+.md-typeset pre,
+.md-typeset .highlight {
+  border-radius: var(--km-radius);
+}
+.md-typeset pre > code,
+.md-typeset .highlight {
+  background-color: var(--km-code-bg);
+  box-shadow: var(--km-shadow-sm);
+  border: 1px solid var(--km-border);
+}
+
+/* ---------- 表格 ---------- */
+.md-typeset table:not([class]) {
+  border-radius: var(--km-radius);
+  overflow: hidden;
+  box-shadow: var(--km-shadow-sm);
+  border: 1px solid var(--km-border);
+}
+.md-typeset table:not([class]) th {
+  background-color: var(--km-code-bg);
+  font-weight: 400;
+  color: var(--km-slate);
+}
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  border-bottom: 1px solid var(--km-border);
+}
+
+/* ---------- 提示框 ---------- */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: var(--km-radius);
+  border-width: 1px;
+  border-left-width: 1px;
+  box-shadow: var(--km-shadow-sm);
+}
+.md-typeset .admonition-title,
+.md-typeset details > summary {
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* ---------- 页脚 ---------- */
+.md-footer {
+  border-top: 1px solid var(--km-border);
+  color: var(--km-slate-light);
+}
+.md-footer-meta {
+  background-color: transparent;
+}
+.md-footer__title {
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--km-slate);
+}
+.md-footer__link {
+  transition: all 0.3s ease-in-out;
+}
+.md-footer__link:hover {
+  color: var(--km-slate);
+}
+.md-footer__direction {
+  color: var(--km-slate-faint);
+}
+
+/* ---------- 回到顶部 / 进度条 ---------- */
+.md-top {
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid var(--km-border);
+  box-shadow: var(--km-shadow-md);
+  color: var(--km-slate);
+}
+.md-progress {
+  background-color: var(--km-blush);
+}
+
+/* ============================================================
+   首页组件 (#km-home)
+   对应 Style Rules 中的 Hero / 卡片 / 按钮 / 间距 token
+   所有选择器带 #km-home 前缀，以覆盖 .md-typeset 的同名规则
+   ============================================================ */
+#km-home {
+  color: var(--km-slate);
+}
+
+/* --- Hero --- */
+#km-home .km-hero {
+  position: relative;
+  padding: 4.5rem 0 3.5rem;
+}
+@media (min-width: 768px) {
+  #km-home .km-hero { padding: 7rem 0 4.5rem; }
+}
+@media (min-width: 1024px) {
+  #km-home .km-hero { padding: 8.5rem 0 5rem; }
+}
+
+#km-home .km-hero-greet {
+  margin: 0 0 1.2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--km-blush-deep);
+}
+
+#km-home .km-hero-title {
+  margin: 0 0 1.1rem;
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+  color: var(--km-slate);
+  font-size: 2rem;                    /* text-3xl */
+}
+@media (min-width: 768px) {
+  #km-home .km-hero-title { font-size: 3rem; } /* md:text-5xl */
+}
+@media (min-width: 1024px) {
+  #km-home .km-hero-title { font-size: 3.5rem; }
+}
+
+#km-home .km-hero-meta {
+  margin: 0 0 1.4rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--km-slate-faint);
+}
+
+#km-home .km-hero-sub {
+  margin: 0;
+  max-width: 32em;
+  font-size: 1rem;
+  line-height: 2;
+  color: var(--km-slate);
+}
+
+#km-home .km-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.2rem;
+}
+
+/* 粉彩小圆点：最克制的装饰 */
+#km-home .km-dots {
+  position: absolute;
+  top: 2.2rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+#km-home .km-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+#km-home .km-dots span:nth-child(1) { background: var(--km-blush); }
+#km-home .km-dots span:nth-child(2) { background: var(--km-sage); }
+#km-home .km-dots span:nth-child(3) { background: var(--km-sand); }
+@media (max-width: 480px) {
+  #km-home .km-dots { display: none; }
+}
+
+#km-home .km-divider {
+  border: none;
+  border-top: 1px solid var(--km-border);
+  margin: 0;
+}
+
+/* --- Section --- */
+#km-home .km-section {
+  padding: 3.5rem 0 0;
+}
+@media (min-width: 768px) {
+  #km-home .km-section { padding: 4.5rem 0 0; }
+}
+#km-home .km-section-last {
+  padding-bottom: 3rem;
+}
+@media (min-width: 768px) {
+  #km-home .km-section-last { padding-bottom: 4.5rem; }
+}
+
+#km-home .km-section-title {
+  margin: 0 0 1rem;
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--km-slate);
+  font-size: 1.25rem;                  /* text-xl */
+}
+@media (min-width: 768px) {
+  #km-home .km-section-title { font-size: 1.875rem; }  /* md:text-3xl */
+}
+
+#km-home .km-section-desc {
+  margin: 0;
+  color: var(--km-slate-light);
+  font-size: 0.95rem;
+}
+
+#km-home .km-text {
+  margin: 0;
+  max-width: 34em;
+  font-size: 0.95rem;
+  line-height: 2;
+  color: var(--km-slate);
+}
+#km-home .km-text a {
+  color: var(--km-blush-deep);
+  text-decoration: underline;
+  text-decoration-color: rgba(212, 165, 165, 0.5);
+  text-underline-offset: 0.2em;
+}
+#km-home .km-text a:hover {
+  color: var(--km-slate);
+}
+
+/* --- 卡片网格 --- */
+#km-home .km-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.2rem;
+}
+#km-home .km-grid-2 { grid-template-columns: 1fr; }
+#km-home .km-grid-3 { grid-template-columns: 1fr; }
+@media (min-width: 768px) {
+  #km-home .km-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  #km-home .km-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  #km-home .km-grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* --- 卡片 ---
+   rounded-2xl + bg-[#faf9f7] + border border-[#3d4a5c]/8 + shadow-sm */
+#km-home .km-card {
+  display: block;
+  padding: 2rem 1.75rem;               /* p-8 */
+  border-radius: var(--km-radius);
+  background-color: var(--km-card-bg);
+  border: 1px solid var(--km-border);
+  box-shadow: var(--km-shadow-sm);
+  text-decoration: none;
+  color: var(--km-slate);
+  transition: all 0.3s ease-in-out;
+}
+@media (min-width: 768px) {
+  #km-home .km-card { padding: 2.5rem; }        /* md:p-10 */
+}
+#km-home .km-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--km-shadow-md);     /* hover:shadow-[0_4px_12px_rgba(61,74,92,0.06)] */
+  border-color: rgba(212, 165, 165, 0.4);
+  text-decoration: none;
+  color: var(--km-slate);
+}
+#km-home .km-card:active {
+  transform: scale(0.98);
+}
+
+#km-home .km-card-title {
+  margin: 0 0 0.7rem;
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--km-slate);
+  font-size: 1.125rem;                 /* text-lg */
+}
+@media (min-width: 768px) {
+  #km-home .km-card-title { font-size: 1.25rem; }  /* md:text-xl */
+}
+
+#km-home .km-card-text {
+  margin: 0 0 1.3rem;
+  max-width: 30em;
+  font-size: 0.875rem;                 /* text-sm */
+  line-height: 1.9;
+  color: var(--km-slate-light);
+}
+
+#km-home .km-card-link {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--km-blush-deep);
+  transition: color 0.3s ease-in-out;
+}
+#km-home .km-card:hover .km-card-link {
+  color: var(--km-slate);
+}
+
+#km-home .km-more {
+  margin: 2.2rem 0 0;
+  font-size: 0.9rem;
+}
+#km-home .km-more a {
+  color: var(--km-blush-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 165, 165, 0.5);
+  padding-bottom: 0.1rem;
+  transition: all 0.3s ease-in-out;
+}
+#km-home .km-more a:hover {
+  color: var(--km-slate);
+  border-color: var(--km-slate);
+}
+
+/* --- 按钮 ---
+   rounded-2xl + shadow-sm + font-light tracking-wide + transition-all duration-300 */
+#km-home .km-btn {
+  display: inline-block;
+  padding: 0.72rem 1.8rem;
+  border-radius: var(--km-radius);
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: var(--km-slate);
+  box-shadow: var(--km-shadow-sm);
+  transition: all 0.3s ease-in-out;
+}
+#km-home .km-btn:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+#km-home .km-btn:active {
+  transform: scale(0.98);
+}
+
+#km-home .km-btn-primary {
+  background-color: var(--km-slate);
+  color: var(--km-bg);
+}
+#km-home .km-btn-primary:hover {
+  background-color: #51617a;
+  color: var(--km-bg);
+  box-shadow: var(--km-shadow-md);
+}
+
+#km-home .km-btn-ghost {
+  background-color: transparent;
+  color: var(--km-slate);
+  border: 1px solid rgba(61, 74, 92, 0.2);
+}
+#km-home .km-btn-ghost:hover {
+  border-color: var(--km-blush);
+  color: var(--km-blush-deep);
+  box-shadow: var(--km-shadow-md);
+}
+
+/* 项目首页导语 */
+#km-home .km-lead {
+  font-size: 1rem;
+  color: var(--km-slate-light);
+  margin: 0 0 2.5rem;
+  max-width: 34em;
+  line-height: 2;
+}
+
+/* ---------- 动效降级 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  #km-home .km-card:hover,
+  #km-home .km-btn:hover,
+  .md-typeset .md-button:hover {
+    transform: none;
+  }
+}
